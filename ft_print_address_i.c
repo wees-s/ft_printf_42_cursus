@@ -1,49 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_utils.c                                   :+:      :+:    :+:   */
+/*   ft_print_address_i.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wedos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/31 15:23:17 by wedos-sa          #+#    #+#             */
-/*   Updated: 2025/08/01 18:40:51 by wedos-sa         ###   ########.fr       */
+/*   Created: 2025/08/01 16:39:45 by wedos-sa          #+#    #+#             */
+/*   Updated: 2025/08/01 19:42:47 by wedos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar_i(int c)
+int	ft_print_address_i(unsigned long long  n)
 {
-	write(1, &c, 1);
-	return (1);
-}
+	char				*hexa;
+	unsigned long long	div;
+	int					count;
 
-int	ft_putstr_i(char *s)
-{
-	int	i;
-
-	i = 0;
-    if (!s)
-    {
-        ft_putstr_fd("(null)", 1);
-        return (6);
-    }
-	while (s[i] != '\0')
+	div = 1;
+	hexa = "0123456789abcdef";
+	count = 2;
+	if (!n)
+		return (ft_putstr_i("(nil)"));
+	write(1, "0x", 2);
+	while (n > 0)
 	{
-		write(1, &s[i], 1);
-		i++;
+		while (((n / div) > 0) && (div < (n / 16)))
+			div = div * 16;
+		if (div > n)
+			div = div / 16;
+		while (div > 0)
+		{
+			write(1, &hexa[n / div], 1);
+			count++;
+			n = n % div;
+			div = div / 16;
+		}
 	}
-	return (i);
-}
-
-int	ft_putnbr_i(int n)
-{
-	char	*nb;
-	int		count;
-
-	count = 0;
-	nb = ft_itoa(n);
-	count = ft_putstr_i(nb);
-	free(nb);
 	return (count);
 }
