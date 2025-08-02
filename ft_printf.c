@@ -6,7 +6,7 @@
 /*   By: wedos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:36:40 by wedos-sa          #+#    #+#             */
-/*   Updated: 2025/08/01 19:21:39 by wedos-sa         ###   ########.fr       */
+/*   Updated: 2025/08/02 14:32:22 by wedos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ int	ft_output(const char *str, va_list args)
 		return (ft_putstr_i(va_arg(args, char *)));
 	else if (*str == 'd' || *str == 'i')
 		return (ft_putnbr_i(va_arg(args, int)));
-	else if (*str == 'x' || *str == 'X')
-		return (ft_selection_hex(va_arg(args, unsigned long long), str));
+	else if ((*str == 'x' || *str == 'X') && str)
+		return (ft_selec_hex((unsigned int)va_arg(args, unsigned int), str));
 	else if (*str == 'p')
 		return (ft_print_address_i((unsigned long long)va_arg(args, void *)));
+	else if (*str == 'u')
+		return (ft_unsignednbr_i(va_arg(args, unsigned int)));
 	else
 		return (ft_putchar_i('%') + ft_putchar_i(*str));
 	return (-1);

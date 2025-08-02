@@ -6,7 +6,7 @@
 /*   By: wedos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:23:17 by wedos-sa          #+#    #+#             */
-/*   Updated: 2025/08/01 18:40:51 by wedos-sa         ###   ########.fr       */
+/*   Updated: 2025/08/02 14:10:01 by wedos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	ft_putstr_i(char *s)
 	int	i;
 
 	i = 0;
-    if (!s)
-    {
-        ft_putstr_fd("(null)", 1);
-        return (6);
-    }
+	if (!s)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
 	while (s[i] != '\0')
 	{
 		write(1, &s[i], 1);
@@ -45,5 +45,25 @@ int	ft_putnbr_i(int n)
 	nb = ft_itoa(n);
 	count = ft_putstr_i(nb);
 	free(nb);
+	return (count);
+}
+
+int	ft_unsignednbr_i(unsigned int n)
+{
+	int					count;
+	unsigned int		div;
+	char				c;
+
+	count = 0;
+	div = 1;
+	while (n / div >= 10)
+		div = div * 10;
+	while (n >= 0 && div != 0)
+	{
+		c = n / div + 48;
+		count += ft_putchar_i(c);
+		n = n % div;
+		div = div / 10;
+	}
 	return (count);
 }
