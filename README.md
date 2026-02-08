@@ -1,3 +1,5 @@
+<img width="2000" height="1000" alt="image" src="https://github.com/user-attachments/assets/7724d43b-5d1a-45e0-84e5-6751c911fb19" />
+
 # ft_printf
 
 A custom implementation of the standard C library function `printf()` as part of the 42 School curriculum.
